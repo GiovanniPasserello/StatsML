@@ -1,19 +1,8 @@
 # StatsML
 
-StatsML is a machine learning and data processing library for Python. 
-It was developed by myself in an attempt to further consolidate my machine learning
-education and gain experience through implementation of many state-of-the-art
-processes used today. The library is not wholly extensive and does not implement specific hardware-level 
-optimizations, but does contain the majority of features common to most machine learning libraries. These 
-features range from simple statistical methods, to data processing, to deep neural networks and much more.
+StatsML is a machine learning and data processing library for Python. It was developed by myself in an attempt to further consolidate my machine learning education and gain experience through implementation of state-of-the-art processes. The library is not wholly extensive and does not implement specific hardware-level optimizations, but does contain the majority of features common to many machine learning libraries. These features range from simple statistical methods, to neural networks, to data processing, and much more.
 
-Having taken some machine learning courses both online and at university, I was inspired to 
-read further into the literature and investigate deeper into the field. I decided to build StatsML entirely
-from scratch without the help of any external packages, aside from NumPy for performance and usability purposes.
-The ensuing documentation details some of my experiences and findings throughout this process.
-
-*Please note that this library was not built to rival any prominent machine learning frameworks. 
-It was simply built as an exploratory and educational endeavour for myself in order to expand my knowledge of the field.*
+*This library was not built to rival any prominent machine learning frameworks, it is simply an exploratory and educational endeavour for myself in order to expand my knowledge of the field.*
 
 ## Table of Contents
 
@@ -102,6 +91,8 @@ Discussion on various performance metrics of the library...
 Link to project repository that uses StatsML...
 
 ## Technologies
+
+StatsML is built entirely from scratch without the help of external packages, aside from NumPy and Pandas for performance and data handling purposes.
 
 * [Python 3](https://docs.python.org/3/) - StatsML implementation programming language of choice
 * [NumPy](https://numpy.org/) - Python library adding efficient support for large, multi-dimensional arrays and matrices

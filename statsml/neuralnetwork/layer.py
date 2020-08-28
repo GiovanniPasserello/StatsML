@@ -15,17 +15,23 @@ class Layer:
     Abstract layer class
     """
 
+    """
+    Required
+    """
     def __init__(self, *args, **kwargs):
         raise NotImplementedError()
-
-    def __call__(self, *args, **kwargs):
-        return self.forward(*args, **kwargs)
 
     def forward(self, *args, **kwargs):
         raise NotImplementedError()
 
     def backward(self, *args, **kwargs):
         raise NotImplementedError()
+
+    """
+    Not Required
+    """
+    def __call__(self, *args, **kwargs):
+        pass
 
     def update_params(self, *args, **kwargs):
         pass
@@ -68,7 +74,7 @@ class LinearLayer(Layer):
     def forward(self, x):
         """
         Performs forward pass through the layer (i.e. returns Wx + b).
-        Stores information needed to compute gradient at a later stage in _cache_current
+        Stores information needed to compute gradient at a later stage in _cache_current.
 
         Arguments:
             x {np.ndarray} -- Input array of shape (batch_size, n_in)

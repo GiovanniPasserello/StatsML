@@ -35,7 +35,7 @@ def example_main_iris():
 
     trainer = Trainer(
         network=net,
-        batch_size=1,
+        batch_size=8,
         nb_epoch=1000,
         learning_rate=0.01,
         loss_fun="cross_entropy",

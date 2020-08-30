@@ -15,9 +15,6 @@ class Layer:
     Abstract layer class
     """
 
-    """
-    Required
-    """
     def __init__(self, *args, **kwargs):
         raise NotImplementedError()
 
@@ -27,9 +24,6 @@ class Layer:
     def backward(self, *args, **kwargs):
         raise NotImplementedError()
 
-    """
-    Not Required
-    """
     def __call__(self, *args, **kwargs):
         pass
 
@@ -49,6 +43,7 @@ class LinearLayer(Layer):
           - Faster convergence than random initialization
           - Mitigates saturated or dead gradients
         """
+
         low = -gain * np.sqrt(6.0 / np.sum(size))
         high = gain * np.sqrt(6.0 / np.sum(size))
         return np.random.uniform(low, high, size)
@@ -59,6 +54,7 @@ class LinearLayer(Layer):
             n_in {int} -- dimension of input
             n_out {int} -- dimension of output
         """
+
         self.n_in = n_in
         self.n_out = n_out
 
@@ -81,6 +77,7 @@ class LinearLayer(Layer):
         Returns:
             {np.ndarray} -- Output array of shape (batch_size, n_out)
         """
+
         assert x.shape[1] == self._W.shape[0]
 
         # Store the input for later backpropagation
@@ -98,6 +95,7 @@ class LinearLayer(Layer):
         Returns:
             {np.ndarray} -- Array containing gradients w.r.t. layer input of shape (batch_size, n_in).
         """
+
         assert self.n_out == grad_z.shape[1]
 
         # Store gradients for parameter updates
@@ -114,6 +112,7 @@ class LinearLayer(Layer):
         Arguments:
             learning_rate {float} -- Learning rate of update step.
         """
+
         self._W -= learning_rate * self._grad_W_current
         self._b -= learning_rate * self._grad_b_current
 

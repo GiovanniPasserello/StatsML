@@ -18,6 +18,7 @@ class MultiLayerNetwork(object):
             the number of layers)
             activations {list} -- List of activation functions to use for each layer
         """
+
         self.input_dim = input_dim
         self.neurons = neurons
         self.activations = activations
@@ -55,6 +56,7 @@ class MultiLayerNetwork(object):
         Returns:
             {np.ndarray} -- Output array of shape (batch_size, num_neurons_in_final_layer)
         """
+
         assert x.shape[1] == self._layers[0].n_in
 
         # Pass the input x through the whole network and return the output of the final layer.
@@ -75,6 +77,7 @@ class MultiLayerNetwork(object):
         Returns:
             {np.ndarray} -- Array containing gradient w.r.t. layer input of shape (batch_size, input_dim)
         """
+
         assert isinstance(self._layers[-1], SigmoidLayer) or \
                isinstance(self._layers[-1], ReluLayer) or \
                grad_z.shape[1] == self._layers[-1].n_out
@@ -91,6 +94,7 @@ class MultiLayerNetwork(object):
         Arguments:
             learning_rate {float} -- Learning rate of update step
         """
+
         for layer in self._layers:
             layer.update_params(learning_rate)
 
@@ -99,6 +103,7 @@ def save_network(network, fpath):
     """
     Utility function to pickle `network` at file path `fpath`.
     """
+
     with open(fpath, "wb") as f:
         pickle.dump(network, f)
 
@@ -107,6 +112,7 @@ def load_network(fpath):
     """
     Utility function to load network found at file path `fpath`.
     """
+
     with open(fpath, "rb") as f:
         network = pickle.load(f)
     return network

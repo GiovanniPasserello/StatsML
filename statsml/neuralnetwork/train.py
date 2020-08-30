@@ -26,6 +26,7 @@ class Trainer(object):
             loss_fun {str} -- Loss function to be used -> possible values: mse, cross_entropy
             shuffle_flag {bool} -- If True, training data is shuffled before training
         """
+
         self.network = network
         self.batch_size = batch_size
         self.nb_epoch = nb_epoch
@@ -49,6 +50,7 @@ class Trainer(object):
         Returns:
             2-tuple of np.ndarray: (shuffled inputs, shuffled_targets)
         """
+
         assert len(input_dataset) == len(target_dataset)
 
         permutation = np.random.permutation(len(input_dataset))
@@ -69,6 +71,7 @@ class Trainer(object):
             - input_dataset {np.ndarray} -- Array of input features, of shape (num_training_data_points, n_features)
             - target_dataset {np.ndarray} -- Array of corresponding targets of shape (num_training_data_points, )
         """
+
         assert len(input_dataset) == len(target_dataset)
 
         for _ in range(self.nb_epoch):

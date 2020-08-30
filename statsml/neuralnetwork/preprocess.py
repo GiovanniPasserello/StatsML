@@ -24,6 +24,7 @@ class Preprocessor(object):
         Returns:
             {np.ndarray} normalized dataset
         """
+
         assert data.shape[1] == self._num_features
 
         return (data - self._data_mins) / self._data_ranges
@@ -37,6 +38,7 @@ class Preprocessor(object):
         Returns:
             {np.ndarray} reverted dataset
         """
+
         assert data.shape[1] == self._num_features
 
         return (data * self._data_ranges) + self._data_mins

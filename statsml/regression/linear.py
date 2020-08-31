@@ -23,18 +23,20 @@ class LinearRegressor:
 
         self.theta = theta if theta else np.zeros((self.num_features, 1))
 
-    def gradient_descent(self, alpha, num_iters):
+    def gradient_descent(self, alpha, num_iters, lmda):
         """ Perform gradient descent to fit theta to the data x, given y
 
         Arguments:
             alpha {float} -- the learning rate
             num_iters {int} -- the number of iterations to perform
+            lmda {float} -- the l1 regularisation constant for gradient calculations
         """
 
         scalar = alpha / len(self.x)
         for i in range(num_iters):
-            gradient = self.x.transpose().dot((self.x.dot(self.theta) - self.y))
-            self.theta -= scalar * gradient
+            gradients = self.x.transpose().dot((self.x.dot(self.theta) - self.y))
+            gradients[1:, :] += lmda / len(self.x) * abs(self.theta[1:, :])
+            self.theta -= scalar * gradients
 
     def feature_normalize(self, x):
         """
@@ -82,7 +84,7 @@ def example_main(dat):
     regressor = LinearRegressor(dat)
     print("Starting Cost:", regressor.compute_cost())
     print("Training...")
-    regressor.gradient_descent(alpha=0.1, num_iters=400)
+    regressor.gradient_descent(alpha=0.1, num_iters=400, lmda=0.1)
     print("Final Cost:", regressor.compute_cost())
     print("Final Theta:\n", regressor.theta)
 

@@ -28,20 +28,18 @@ class LogisticRegressor:
 
         self.theta = theta if theta else np.zeros((self.num_features, 1))
 
-    def gradient_descent(self, alpha, num_iters):
+    def gradient_descent(self, alpha, num_iters, lmda):
         """ Perform gradient descent to fit theta to the data x, given y
 
         Arguments:
             alpha {float} -- the learning rate
             num_iters {int} -- the number of iterations to perform
+            lmda {float} -- the l1 regularisation constant for gradient calculations
         """
 
         scalar = alpha / len(self.y)
         for i in range(num_iters):
-            pred = self.x.dot(self.theta)
-            sigmoid_pred = self.sigmoid(pred)
-            err = sigmoid_pred - self.y
-            gradient = self.x.transpose().dot(err)
+            gradient = self.compute_gradient(lmda)
             self.theta -= scalar * gradient
 
     def feature_normalize(self, x):
@@ -82,6 +80,22 @@ class LogisticRegressor:
 
         return (scalar * loss).sum()
 
+    def compute_gradient(self, lmda):
+        """ Compute the elementwise l1 regularised gradient of theta for logistic regression
+
+        Arguments:
+            lmda {float} -- the l1 regularisation constant for gradient calculations
+        Returns:
+            {float} -- the elementwise gradient of theta for this logistic model
+        """
+
+        pred = self.x.dot(self.theta)
+        sigmoid_pred = self.sigmoid(pred)
+        err = sigmoid_pred - self.y
+        gradients = self.x.transpose().dot(err)
+        gradients[1:, :] += lmda / len(self.y) * abs(self.theta[1:, :])
+        return gradients
+
     def predict(self, x):
         """ Predict the output of the logistic model against sample data using learned parameters
 
@@ -109,16 +123,16 @@ def example_main(dat):
     regressor = LogisticRegressor(dat)
     print("Starting Cost:", regressor.compute_cost())
     print("Training...")
-    regressor.gradient_descent(alpha=0.1, num_iters=1500)
+    regressor.gradient_descent(alpha=0.1, num_iters=1500, lmda=0.1)
     print("Final Cost:", regressor.compute_cost())
     print("Final Theta:\n", regressor.theta)
 
 
 if __name__ == "__main__":
-    print("Beginning Univariate Linear Regression:\n")
+    print("Beginning Multivariate Logistic Regression 1:\n")
     multivariate_dat1 = np.loadtxt("../../datasets/regression/logistic_multivariate1.txt", delimiter=",")
     example_main(multivariate_dat1)
 
-    print("\nBeginning Multivariate Linear Regression:\n")
+    print("\nBeginning Multivariate Logistic Regression 2:\n")
     multivariate_dat2 = np.loadtxt("../../datasets/regression/logistic_multivariate2.txt", delimiter=",")
     example_main(multivariate_dat2)

@@ -9,12 +9,8 @@ StatsML is a machine learning and data processing library for Python. It was dev
     * Installation
 2. [Structure](#structure)
 3. [Features](#features)
-4. [Technical Background](#technical-background)
-    * Neural Network
-    * Decision Classifier
-    * Clustering
-5. [Technologies](#technologies)
-6. [License](#license)
+4. [Technologies](#technologies)
+5. [License](#license)
 
 ## Getting Started
 

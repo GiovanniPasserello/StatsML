@@ -27,9 +27,6 @@ class LinearRegressor:
         """ Perform gradient descent to fit theta to the data x, given y
 
         Arguments:
-            x {np.ndarray} -- An N x K dimensional numpy array of data samples
-            y {np.ndarray} -- An N dimensional numpy array of ground truth values
-            theta {np.ndarray} -- A K dimensional numpy array of linear model weightings
             alpha {float} -- the learning rate
             num_iters {int} -- the number of iterations to perform
         """
@@ -63,16 +60,23 @@ class LinearRegressor:
     def compute_cost(self):
         """ Compute the cost for linear regression
 
-        Arguments:
-            x {np.ndarray} -- An N x K dimensional numpy array of data samples
-            y {np.ndarray} -- An N dimensional numpy array of ground truth values
-            theta {np.ndarray} -- A K dimensional numpy array of linear model weightings
         Returns:
             {float} -- the mean squared error of this linear model
         """
 
         diffs = self.x.dot(self.theta) - self.y
         return 1 / (2 * len(self.y)) * sum(diffs * diffs)
+
+    def predict(self, x):
+        """ Predict the output of the linear model against sample data using learned parameters
+
+        Arguments:
+            x {np.ndarray} -- An N x K dimensional numpy array of data samples to predict
+        Returns:
+            {[float]} -- a list of the predicted outputs of the model
+        """
+
+        return x.dot(self.theta)
 
 
 def example_main(dat):

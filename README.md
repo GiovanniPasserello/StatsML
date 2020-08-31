@@ -58,6 +58,9 @@ Within each directory is a suite of classes used to implement the specific algor
     * Random Forest Classifier
     * Decision Tree Pruning
     * Cross Validation Suite
+* __Regression__ - a suite of scripts used to regress multi-dimensional data
+    * Linear Regression
+    * Logistic Regression
 * __Clustering__ - a suite of scripts used to cluster multi-dimensional data
     * K Means
     * Gaussian Mixture Model

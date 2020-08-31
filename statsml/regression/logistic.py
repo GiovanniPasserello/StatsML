@@ -28,20 +28,6 @@ class LogisticRegressor:
 
         self.theta = theta if theta else np.zeros((self.num_features, 1))
 
-    def gradient_descent(self, alpha, num_iters, lmda):
-        """ Perform gradient descent to fit theta to the data x, given y
-
-        Arguments:
-            alpha {float} -- the learning rate
-            num_iters {int} -- the number of iterations to perform
-            lmda {float} -- the l1 regularisation constant for gradient calculations
-        """
-
-        scalar = alpha / len(self.y)
-        for i in range(num_iters):
-            gradient = self.compute_gradient(lmda)
-            self.theta -= scalar * gradient
-
     def feature_normalize(self, x):
         """
         Normalize the features in x
@@ -62,11 +48,48 @@ class LogisticRegressor:
 
         return (x - self.mu) / self.sigma
 
-    def compute_cost(self):
+    def gradient_descent(self, alpha, num_iters, l1, l2):
+        """ Perform gradient descent to fit theta to the data x, given y
+
+        Arguments:
+            alpha {float} -- the learning rate
+            num_iters {int} -- the number of iterations to perform
+            l1 {float} -- the l1 regularisation constant for gradient calculations
+            l2 {float} -- the l2 regularisation constant for gradient calculations
+        """
+
+        scalar = alpha / len(self.y)
+        for i in range(num_iters):
+            gradient = self.compute_gradient(l1, l2)
+            self.theta -= scalar * gradient
+
+    def compute_gradient(self, l1, l2):
+        """ Compute the elementwise regularised gradient of theta for logistic regression
+
+        Arguments:
+            l1 {float} -- the l1 regularisation constant for gradient calculations
+            l2 {float} -- the l2 regularisation constant for gradient calculations
+        Returns:
+            {float} -- the elementwise gradient of theta for this logistic model
+        """
+
+        pred = self.x.dot(self.theta)
+        sigmoid_pred = self.sigmoid(pred)
+        err = sigmoid_pred - self.y
+
+        gradients = self.x.transpose().dot(err)
+        gradients[1:, :] += l1 * np.sign(self.theta[1:, :])  # l1 regularisation
+        gradients[1:, :] += 2 * l2 * self.theta[1:, :]  # l2 regularisation
+
+        return gradients
+
+    def compute_cost(self, l1, l2):
         """ Compute the cost for logistic regression
 
         Returns:
             {float} -- the cross entropy cost of this logistic model
+            l1 {float} -- the l1 regularisation constant for cost calculations
+            l2 {float} -- the l2 regularisation constant for cost calculations
         """
 
         scalar = -1 / len(self.y)
@@ -76,25 +99,12 @@ class LogisticRegressor:
         # Add small EPSILON to each term to avoid division by zero
         first_term = self.y.transpose().dot(np.log(sigmoid_pred + EPSILON))
         second_term = (1 - self.y).transpose().dot(np.log(1 - sigmoid_pred + EPSILON))
-        loss = first_term + second_term
 
-        return (scalar * loss).sum()
+        loss = scalar * (first_term + second_term).sum()
+        loss += l1 * np.sign(self.theta).sum()  # l1 regularisation
+        loss += l2 * np.square(self.theta).sum()  # l2 regularisation
 
-    def compute_gradient(self, lmda):
-        """ Compute the elementwise l1 regularised gradient of theta for logistic regression
-
-        Arguments:
-            lmda {float} -- the l1 regularisation constant for gradient calculations
-        Returns:
-            {float} -- the elementwise gradient of theta for this logistic model
-        """
-
-        pred = self.x.dot(self.theta)
-        sigmoid_pred = self.sigmoid(pred)
-        err = sigmoid_pred - self.y
-        gradients = self.x.transpose().dot(err)
-        gradients[1:, :] += lmda / len(self.y) * abs(self.theta[1:, :])
-        return gradients
+        return loss
 
     def predict(self, x):
         """ Predict the output of the logistic model against sample data using learned parameters
@@ -120,11 +130,17 @@ class LogisticRegressor:
 
 
 def example_main(dat):
+    # Hyper-parameters
+    alpha = 0.1
+    num_iters = 1500
+    l1 = 0.1
+    l2 = 0.01
+
     regressor = LogisticRegressor(dat)
-    print("Starting Cost:", regressor.compute_cost())
+    print("Starting Cost:", regressor.compute_cost(l1, l2))
     print("Training...")
-    regressor.gradient_descent(alpha=0.1, num_iters=1500, lmda=0.1)
-    print("Final Cost:", regressor.compute_cost())
+    regressor.gradient_descent(alpha=alpha, num_iters=num_iters, l1=l1, l2=l2)
+    print("Final Cost:", regressor.compute_cost(l1, l2))
     print("Final Theta:\n", regressor.theta)
 
 

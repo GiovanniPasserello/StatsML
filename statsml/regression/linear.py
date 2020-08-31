@@ -23,21 +23,6 @@ class LinearRegressor:
 
         self.theta = theta if theta else np.zeros((self.num_features, 1))
 
-    def gradient_descent(self, alpha, num_iters, lmda):
-        """ Perform gradient descent to fit theta to the data x, given y
-
-        Arguments:
-            alpha {float} -- the learning rate
-            num_iters {int} -- the number of iterations to perform
-            lmda {float} -- the l1 regularisation constant for gradient calculations
-        """
-
-        scalar = alpha / len(self.x)
-        for i in range(num_iters):
-            gradients = self.x.transpose().dot((self.x.dot(self.theta) - self.y))
-            gradients[1:, :] += lmda / len(self.x) * abs(self.theta[1:, :])
-            self.theta -= scalar * gradients
-
     def feature_normalize(self, x):
         """
         Normalize the features in x
@@ -58,15 +43,39 @@ class LinearRegressor:
 
         return (x - self.mu) / self.sigma
 
-    def compute_cost(self):
+    def gradient_descent(self, alpha, num_iters, l1, l2):
+        """ Perform gradient descent to fit theta to the data x, given y
+
+        Arguments:
+            alpha {float} -- the learning rate
+            num_iters {int} -- the number of iterations to perform
+            l1 {float} -- the l1 regularisation constant for gradient calculations
+            l2 {float} -- the l2 regularisation constant for gradient calculations
+        """
+
+        scalar = alpha / len(self.x)
+        for i in range(num_iters):
+            gradients = self.x.transpose().dot((self.x.dot(self.theta) - self.y))
+            gradients[1:, :] += l1 * np.sign(self.theta[1:, :])  # l1 regularisation
+            gradients[1:, :] += 2 * l2 * self.theta[1:, :]  # l2 regularisation
+            self.theta -= scalar * gradients
+            
+    def compute_cost(self, l1, l2):
         """ Compute the cost for linear regression
 
         Returns:
             {float} -- the mean squared error of this linear model
+            l1 {float} -- the l1 regularisation constant for cost calculations
+            l2 {float} -- the l2 regularisation constant for cost calculations
         """
 
         diffs = self.x.dot(self.theta) - self.y
-        return 1 / (2 * len(self.y)) * sum(diffs * diffs)
+        loss = 1 / (2 * len(self.y)) * sum(diffs * diffs)
+
+        loss += l1 * np.sign(self.theta).sum()  # l1 regularisation
+        loss += l2 * np.square(self.theta).sum()  # l2 regularisation
+
+        return loss
 
     def predict(self, x):
         """ Predict the output of the linear model against sample data using learned parameters
@@ -81,11 +90,17 @@ class LinearRegressor:
 
 
 def example_main(dat):
+    # Hyper-parameters
+    alpha = 0.1
+    num_iters = 1000
+    l1 = 0.01
+    l2 = 0.001
+
     regressor = LinearRegressor(dat)
-    print("Starting Cost:", regressor.compute_cost())
+    print("Starting Cost:", regressor.compute_cost(l1, l2))
     print("Training...")
-    regressor.gradient_descent(alpha=0.1, num_iters=400, lmda=0.1)
-    print("Final Cost:", regressor.compute_cost())
+    regressor.gradient_descent(alpha=alpha, num_iters=num_iters, l1=l1, l2=l2)
+    print("Final Cost:", regressor.compute_cost(l1, l2))
     print("Final Theta:\n", regressor.theta)
 
 

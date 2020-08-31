@@ -32,7 +32,6 @@ class LinearRegressor:
         """
 
         scalar = alpha / len(self.x)
-
         for i in range(num_iters):
             gradient = self.x.transpose().dot((self.x.dot(self.theta) - self.y))
             self.theta -= scalar * gradient
@@ -81,7 +80,6 @@ class LinearRegressor:
 
 def example_main(dat):
     regressor = LinearRegressor(dat)
-
     print("Starting Cost:", regressor.compute_cost())
     print("Training...")
     regressor.gradient_descent(alpha=0.1, num_iters=400)
@@ -91,9 +89,9 @@ def example_main(dat):
 
 if __name__ == "__main__":
     print("Beginning Univariate Linear Regression:\n")
-    univariate_dat = np.loadtxt("../../example_datasets/univariate_regression.txt", delimiter=",")
+    univariate_dat = np.loadtxt("../../datasets/regression/linear_univariate.txt", delimiter=",")
     example_main(univariate_dat)
 
     print("\nBeginning Multivariate Linear Regression:\n")
-    multivariate_dat = np.loadtxt("../../example_datasets/multivariate_regression.txt", delimiter=",")
+    multivariate_dat = np.loadtxt("../../datasets/regression/linear_multivariate.txt", delimiter=",")
     example_main(multivariate_dat)

@@ -26,10 +26,10 @@ def standard_example_main():
     ])
     y = np.array(["A", "A", "A", "C", "C", "C"])
 
-    print("Training the decision tree...")
-    classifier = classifier.train(x, y)
+    print("\nTraining the decision tree...")
+    classifier = classifier.train(x, y, prune=False)
 
-    print("Loading the test set...")
+    print("\nLoading the test set...")
     x_test = np.array([
         [1, 6, 3],
         [0, 5, 5],
@@ -42,7 +42,7 @@ def standard_example_main():
     predictions = classifier.predict(x_test)
     print("Predictions: {}".format(predictions))
 
-    print("Evaluating test predictions...")
+    print("\nEvaluating test predictions...")
     evaluator = ConfusionEvaluator()
 
     print("Confusion matrix:")

@@ -107,7 +107,9 @@ class DecisionTreeClassifier(object):
         self.progress += len(dataset)
         while self.progress / len(self.dataset) > self.progress_target:
             print(
-                "Trained {0}% of rows after {1:.2f}s".format(self.progress_target * 100, time.time() - self.start))
+                "Trained {0:.0f}% of rows after {1:.4f}s".format(
+                    self.progress_target * 100, time.time() - self.start
+                ))
             self.progress_target += 0.1
 
     def predict(self, attrs):

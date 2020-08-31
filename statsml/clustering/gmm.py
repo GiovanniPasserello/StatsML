@@ -87,7 +87,7 @@ class GMMClusterer:
             self.likelihood = likelihood
             print("Log likelihood:", self.likelihood)
             return False
-        
+
         print("Converged within bounds at log likelihood: {0}\n".format(likelihood))
         return True
 

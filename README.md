@@ -1,25 +1,20 @@
 # StatsML
 
-StatsML is a machine learning and data processing library for Python. It was developed by myself in an attempt to further consolidate my machine learning education and gain experience through implementation of state-of-the-art processes. The library is not wholly extensive and does not implement any specific hardware-level optimizations, but does contain the majority of features common to many machine learning libraries. These features range from simple statistical methods, to neural networks, to data processing, and much more.
+StatsML is a machine learning and data processing library for Python. It was developed by myself in an attempt to further consolidate my machine learning education and gain experience through implementation of state-of-the-art processes. The library contains many features common to most machine learning libraries, but does not implement any specific hardware-level optimizations. These features range from simple statistical methods, to neural networks, to data processing, and much more.
 
 ## Table of Contents
 
 1. [Getting Started](#getting-started)
-    * [Prerequisites](#prerequisites)
-    * [Installation](#installation)
-2. [Usage](#usage)
-    * ...
-    * [Testing](#testing)
-    * [Example Test](#example-test)
-    * [Running Tests](#running-tests)
+    * Prerequisites
+    * Installation
+2. [Structure](#structure)
 3. [Features](#features)
-    * ...
 4. [Technical Background](#technical-background)
-    * ...
-5. [Performance](#performance)
-    * ...
-6. [Technologies](#technologies)
-7. [License](#license)
+    * Neural Network
+    * Decision Classifier
+    * Clustering
+5. [Technologies](#technologies)
+6. [License](#license)
 
 ## Getting Started
 
@@ -37,64 +32,48 @@ environment](https://packaging.python.org/guides/installing-using-pip-and-virtua
 The packages found in *requirements.txt* will then need to be installed:
 
 ```
-$ pip install -r requirements.txt 
+$ pip3 install -r requirements.txt 
 ```
 
 ### Installation
 
-In order to create a local copy of the codebase you will need to navigate to your directory of choice and clone this repository:
+To create a local copy of the codebase, navigate to your directory of choice and clone this repository:
 
 ```
 $ git clone https://github.com/GiovanniPasserello/StatsML.git
 ```
 
-## Usage
+## Structure
 
-Discussion on purpose of each package and how to use it...
-
-### Testing
-
-Discussion on the test suite implementation...
-
-Explain how to run the automated library tests...
-
-### Example Test
-
-```
-...
-```
-
-### Running Tests
-
-Discuss continuous-integration automated testing... 
-
-Give an example of running the example test above...
-
-```
-$ ...
-```
+StatsML is split into several sections found as a set of directories within 'statsml', each implementing a different machine learning algorithm.
+Within each directory is a suite of classes used to implement the specific algorithm, along with an example demonstrating how to interact with the package on some fake data.
 
 ## Features
 
-Brief structured feature tree hyperlinked to relevant sections in technical background...
-
-## Technical Background
-
-Brief technical explanation for each feature. Linked to relevant resources...
-
-## Performance
-
-Discussion on various performance metrics of the library... 
-
-Link to project repository that uses StatsML...
+* __Neural Network__ - a backpropagating artificial neural network implementation
+    * Multi Layer Network
+    * Layers
+        * Linear
+        * Sigmoid
+        * ReLu
+        * MSE Loss
+        * Cross Entropy Loss
+* __Decision Classifier__ - a decision tree classifier implementation 
+    * Decision Tree Classifier    
+    * Random Forest Classifier
+    * Decision Tree Pruning
+    * Cross Validation Suite
+* __Clustering__ - a suite of scripts used to cluster multi-dimensional data
+    * K Means
+    * Gaussian Mixture Model
+* __Metrics Evaluation__ - a set of metrics extractable from confusion matrices
 
 ## Technologies
 
-StatsML is built entirely from scratch without the use of external packages, aside from NumPy and Pandas for performance and data handling purposes.
+StatsML is built entirely from scratch without the use of external packages, aside from NumPy for performance and data handling purposes.
 
 * [Python 3](https://docs.python.org/3/) - StatsML implementation programming language of choice
 * [NumPy](https://numpy.org/) - Python library adding efficient support for large, multi-dimensional arrays and matrices
-* [Pandas](https://pandas.pydata.org/) - Python library for fast, powerful, flexible and easy to use data analysis and manipulation
 
 ## License
 

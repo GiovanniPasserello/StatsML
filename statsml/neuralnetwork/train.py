@@ -8,15 +8,7 @@ class Trainer(object):
     Trainer: Object that manages the training of MultiLayerNetwork
     """
 
-    def __init__(
-        self,
-        network,
-        batch_size,
-        nb_epoch,
-        learning_rate,
-        loss_fun,
-        shuffle_flag,
-    ):
+    def __init__(self, network, batch_size, nb_epoch, learning_rate, loss_fun, shuffle_flag):
         """
         Arguments:
             network {MultiLayerNetwork} -- MultiLayerNetwork to be trained

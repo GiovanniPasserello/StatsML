@@ -10,7 +10,7 @@ Example usage of MultiLayerNetwork classifier on 'iris.dat' dataset
 """
 
 
-def example_main_iris():
+def example_main():
     input_dim = 4
     neurons = [16, 3]
     activations = ["relu", "identity"]
@@ -53,4 +53,4 @@ def example_main_iris():
 
 
 if __name__ == "__main__":
-    example_main_iris()
+    example_main()

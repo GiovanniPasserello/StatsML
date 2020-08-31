@@ -9,7 +9,7 @@ class PurityFuncs:
         """ Calculate label entropy
 
         Arguments:
-            labels {numpy.array} -- A single dimensional array that we wish to calculate the entropy of
+            labels {np.ndarray} -- A single dimensional array that we wish to calculate the entropy of
         Returns:
             {int} -- The entropy of the labels
         """
@@ -29,7 +29,7 @@ class PurityFuncs:
         """ Calculates gini impurity of a given node's labels
 
         Arguments:
-            labels {numpy.array} -- A single dimensional array that we wish to calculate the entropy of
+            labels {np.ndarray} -- A single dimensional array that we wish to calculate the entropy of
         Returns:
             {int} -- The gini impurity of the node
                 For J classes, an impurity of (J-1)/J indicates an even distribution

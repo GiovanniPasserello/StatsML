@@ -1,6 +1,6 @@
 class Preprocessor(object):
     """
-    Preprocessor: Apply simple preprocessing operations to datasets (min-max normalization)
+    Preprocessor: Apply simple preprocessing operations to real-valued numerical datasets (min-max normalization)
     """
 
     def __init__(self, data):
@@ -8,7 +8,9 @@ class Preprocessor(object):
         Initializes the Preprocessor according to the provided dataset
 
         Arguments:
-            - data {np.ndarray} dataset used to determined the parameters for the normalization
+            data {np.ndarray} --
+                dataset used to determined the parameters for the normalization
+                An N x K dimensional dataset (N samples, K features)
         """
 
         self._num_features = data.shape[1]  # Number of features per sample
@@ -20,7 +22,7 @@ class Preprocessor(object):
         Apply the pre-processing operations to the provided dataset (min-max normalization over the range [0, 1])
 
         Arguments:
-            - data {np.ndarray} dataset to be normalized
+            data {np.ndarray} -- dataset to be normalized
         Returns:
             {np.ndarray} normalized dataset
         """
@@ -34,7 +36,7 @@ class Preprocessor(object):
         Revert the pre-processing operations to retrieve original dataset (min-max normalization over the range [0, 1])
 
         Arguments:
-            - data {np.ndarray} dataset for which to revert normalization
+            data {np.ndarray} -- dataset for which to revert normalization
         Returns:
             {np.ndarray} reverted dataset
         """

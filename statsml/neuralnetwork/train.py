@@ -37,8 +37,8 @@ class Trainer(object):
         Return shuffled versions of the inputs
 
         Arguments:
-            - input_dataset {np.ndarray} -- Array of input features, of shape (num_data_points, n_features)
-            - target_dataset {np.ndarray} -- Array of corresponding targets, of shape (num_data_points, )
+            input_dataset {np.ndarray} -- Array of input features, of shape (num_data_points, n_features)
+            target_dataset {np.ndarray} -- Array of corresponding targets, of shape (num_data_points, )
         Returns:
             2-tuple of np.ndarray: (shuffled inputs, shuffled_targets)
         """
@@ -60,8 +60,8 @@ class Trainer(object):
                 - Perform one step of gradient descent on the network parameters
 
         Arguments:
-            - input_dataset {np.ndarray} -- Array of input features, of shape (num_training_data_points, n_features)
-            - target_dataset {np.ndarray} -- Array of corresponding targets of shape (num_training_data_points, )
+            input_dataset {np.ndarray} -- Array of input features, of shape (num_training_data_points, n_features)
+            target_dataset {np.ndarray} -- Array of corresponding targets of shape (num_training_data_points, )
         """
 
         assert len(input_dataset) == len(target_dataset)
@@ -112,8 +112,8 @@ class Trainer(object):
         Pass input data forward through the network and then generate predictions through the loss layer
 
         Arguments:
-            - input_dataset {np.ndarray} -- Array of input features of shape (num_evaluation_data_points, n_features)
-            - target_dataset {np.ndarray} -- Array of corresponding targets of shape (#_evaluation_data_points, )
+            input_dataset {np.ndarray} -- Array of input features of shape (num_evaluation_data_points, n_features)
+            target_dataset {np.ndarray} -- Array of corresponding targets of shape (#_evaluation_data_points, )
         """
 
         predictions = self.network.forward(input_dataset)

@@ -5,9 +5,7 @@ StatsML is a machine learning and data processing library for Python. It was dev
 ## Table of Contents
 
 1. [Getting Started](#getting-started)
-    * Prerequisites
-    * Installation
-2. [Structure](#structure)
+2. [Project Structure](#project-structure)
 3. [Features](#features)
 4. [Technologies](#technologies)
 5. [License](#license)
@@ -39,10 +37,10 @@ To create a local copy of the codebase, navigate to your directory of choice and
 $ git clone https://github.com/GiovanniPasserello/StatsML.git
 ```
 
-## Structure
+## Project Structure
 
-StatsML is split into several sections found as a set of directories within 'statsml', each implementing a different machine learning algorithm.
-Within each directory is a suite of classes used to implement the specific algorithm, along with an example demonstrating how to interact with the package on some fake data.
+StatsML is split into several distinct sections found as a set of directories within 'statsml', each implementing a different machine learning algorithm.
+Within each directory is a suite of classes used to implement the specific algorithm, along with an example demonstrating how to interact with the package on a fake dataset.
 
 ## Features
 
@@ -54,6 +52,7 @@ Within each directory is a suite of classes used to implement the specific algor
         * ReLu
         * MSE Loss
         * Cross Entropy Loss
+    * Automated Training Suite
 * __Decision Classifier__ - a decision tree classifier implementation 
     * Decision Tree Classifier    
     * Random Forest Classifier
@@ -62,7 +61,7 @@ Within each directory is a suite of classes used to implement the specific algor
 * __Clustering__ - a suite of scripts used to cluster multi-dimensional data
     * K Means
     * Gaussian Mixture Model
-* __Metrics Evaluation__ - a set of metrics extractable from confusion matrices
+* __Metrics Evaluation__ - a set of extractable metrics from confusion matrices
 
 ## Technologies
 

@@ -14,7 +14,7 @@ class KMeansClusterer:
 		self.distances = [[-1 for _ in range(len(centroids))] for _ in range(len(points))]
 
 	def cluster(self):
-		""" Run k means clustering till convergence
+		""" Run k-means clustering till convergence
 
 		Arguments:
 			centroids {np.ndarray} -- A numpy array of K-dimensional centroid points
